@@ -1,0 +1,4 @@
+node_modules
+dist/
+.env
+stick-and-pucks.json

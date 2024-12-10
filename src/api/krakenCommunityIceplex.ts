@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { KCI_EVENTS_URL } from '../constants';
-import type { KCIEvent } from '../types';
+import type { KciEvent } from '../types';
 
-interface FetchKCIEvents {
+interface FetchKciEvents {
     start: string;
     end: string;
 }
 
-export async function fetchKCIEvents({ start, end }: FetchKCIEvents) {
-    const { data } = await axios.get<KCIEvent[]>(KCI_EVENTS_URL, {
+export async function fetchKciEvents({ start, end }: FetchKciEvents) {
+    const { data } = await axios.get<KciEvent[]>(KCI_EVENTS_URL, {
         params: {
             start,
             end,

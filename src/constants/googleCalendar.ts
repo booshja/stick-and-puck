@@ -1,7 +1,8 @@
 export const LOCATIONS = {
     kci: 'Kraken Community Iceplex',
-    lic: 'Lynnwood Ice Arena',
-};
+    lia: 'Lynnwood Ice Arena',
+    ova: 'Olympicview Arena',
+} as const;
 
 export const CALENDAR_AUTH_URL = 'https://www.googleapis.com/auth/calendar';
 

@@ -1,4 +1,4 @@
-export interface LICEvent {
+export interface LiaOvaEvent {
     id: string;
     description: string;
     title: string;

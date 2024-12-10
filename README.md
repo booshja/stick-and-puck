@@ -5,7 +5,7 @@ A script to gather stick and puck and drop-in times from the closest rinks to wh
 ## Features
 
 -   Fetching data from the KCI API
--   Fetching data from the OVA/LIC API
+-   Fetching data from the OVA/LIA API
 -   Creating events via the Google Calendar SDK
 
 ### Upcoming Features

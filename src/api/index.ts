@@ -1,4 +1,5 @@
 export * from './googleCalendar';
 export * from './krakenCommunityIceplex';
-export * from './lynnwoodIceCenter';
+export * from './lynnwoodIceArena';
+export * from './olympicviewArena';
 export * from './worldTimeAPI';

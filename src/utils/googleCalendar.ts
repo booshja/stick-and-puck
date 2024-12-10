@@ -3,10 +3,13 @@ import {
     KCI_ADDRESS,
     KCI_CALENDAR_COLOR,
     KCI_CALENDAR_TIME_ZONE,
-    LIC_ADDRESS,
-    LIC_CALENDAR_COLOR,
-    LIC_CALENDAR_TIME_ZONE,
+    LIA_ADDRESS,
+    LIA_CALENDAR_COLOR,
+    LIA_CALENDAR_TIME_ZONE,
     LOCATIONS,
+    OVA_ADDRESS,
+    OVA_CALENDAR_COLOR,
+    OVA_CALENDAR_TIME_ZONE,
 } from '../constants';
 import type { CreateEventObject, Location, TimeZone } from '../types';
 
@@ -14,7 +17,7 @@ function getLocationDetails(location: Location) {
     let locationAddress = '';
     let locationPrefix = '';
     let calendarColor = '';
-    let timeZone: TimeZone = LIC_CALENDAR_TIME_ZONE;
+    let timeZone: TimeZone = LIA_CALENDAR_TIME_ZONE;
 
     switch (location) {
         case LOCATIONS.kci:
@@ -23,11 +26,17 @@ function getLocationDetails(location: Location) {
             calendarColor = KCI_CALENDAR_COLOR;
             timeZone = KCI_CALENDAR_TIME_ZONE;
             break;
-        case LOCATIONS.lic:
-            locationAddress = LIC_ADDRESS;
+        case LOCATIONS.lia:
+            locationAddress = LIA_ADDRESS;
             locationPrefix = 'Lynwood - ';
-            calendarColor = LIC_CALENDAR_COLOR;
-            timeZone = LIC_CALENDAR_TIME_ZONE;
+            calendarColor = LIA_CALENDAR_COLOR;
+            timeZone = LIA_CALENDAR_TIME_ZONE;
+            break;
+        case LOCATIONS.ova:
+            locationAddress = OVA_ADDRESS;
+            locationPrefix = 'OVA - ';
+            calendarColor = OVA_CALENDAR_COLOR;
+            timeZone = OVA_CALENDAR_TIME_ZONE;
             break;
         default:
             throw new Error('Invalid location');

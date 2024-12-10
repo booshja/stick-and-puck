@@ -1,20 +1,20 @@
-import { fetchKCIEvents, getDaylightSavings } from '../api';
+import { fetchKciEvents, getDaylightSavings } from '../api';
 import { getNewEventObject, type NewEventObject } from './googleCalendar';
 import { KCI_SKATER_EVENTS, LOCATIONS } from '../constants';
-import type { KCIEvent, PacificTimeAbbreviation } from '../types';
+import type { KciEvent, PacificTimeAbbreviation } from '../types';
 
-function convertToKCIDate(date: string, timeZone: PacificTimeAbbreviation) {
+function convertToKciDate(date: string, timeZone: PacificTimeAbbreviation) {
     let newDate = date.split('T')[0];
     const timeZoneHour = timeZone === 'PDT' ? '07' : '08';
     return newDate.split('T')[0] + 'T00:00:00-' + timeZoneHour + ':00';
 }
 
-async function getKCIDates() {
+async function getKciDates() {
     const timeZone = await getDaylightSavings();
     const currentDate = new Date();
-    const kciStartDate = convertToKCIDate(currentDate.toISOString(), timeZone);
+    const kciStartDate = convertToKciDate(currentDate.toISOString(), timeZone);
     const oneWeekDate = currentDate.setDate(currentDate.getDate() + 7);
-    const kciEndDate = convertToKCIDate(
+    const kciEndDate = convertToKciDate(
         new Date(oneWeekDate).toISOString(),
         timeZone
     );
@@ -22,9 +22,9 @@ async function getKCIDates() {
     return [kciStartDate, kciEndDate];
 }
 
-function filterKCIEvents(events: KCIEvent[], start: string, end: string) {
+function filterKciEvents(events: KciEvent[], start: string, end: string) {
     console.log('Filtering KCI events down to relevant hockey events...');
-    const stickAndPucks = events.filter((event: KCIEvent) => {
+    const stickAndPucks = events.filter((event: KciEvent) => {
         const isDesiredEvent =
             event.title === KCI_SKATER_EVENTS.stickAndPuck ||
             event.title === KCI_SKATER_EVENTS.dropInSkater ||
@@ -37,9 +37,9 @@ function filterKCIEvents(events: KCIEvent[], start: string, end: string) {
     return stickAndPucks;
 }
 
-function transformKCIEvents(events: KCIEvent[]) {
+function transformKciEvents(events: KciEvent[]) {
     console.log('Transforming KCI events...');
-    const kciEvents = events.map<NewEventObject>((event: KCIEvent) => ({
+    const kciEvents = events.map<NewEventObject>((event: KciEvent) => ({
         endDateTime: event.end.substring(0, event.end.length - 1),
         location: LOCATIONS.kci,
         startDateTime: event.start.substring(0, event.start.length - 1),
@@ -52,20 +52,20 @@ function transformKCIEvents(events: KCIEvent[]) {
     return transformedEvents;
 }
 
-export async function getKCIEvents() {
+export async function getKciEvents() {
     console.log('Getting KCI events...');
-    const [start, end] = await getKCIDates();
-    const events = await fetchKCIEvents({
+    const [start, end] = await getKciDates();
+    const events = await fetchKciEvents({
         start,
         end,
     });
-    const filteredEvents = filterKCIEvents(events, start, end);
+    const filteredEvents = filterKciEvents(events, start, end);
     const numOfEvents = filteredEvents.length;
     console.log(
         `${numOfEvents} event${
             numOfEvents > 1 ? 's' : ''
         } found from KCI for the next week...`
     );
-    const transformedEvents = transformKCIEvents(filteredEvents);
+    const transformedEvents = transformKciEvents(filteredEvents);
     return transformedEvents;
 }

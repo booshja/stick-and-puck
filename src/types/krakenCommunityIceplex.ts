@@ -1,6 +1,6 @@
 import { LOCATIONS } from '../constants';
 
-export interface KCIEvent {
+export interface KciEvent {
     url: string;
     title: string;
     start: string;

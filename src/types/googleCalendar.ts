@@ -1,4 +1,8 @@
-import { KCI_CALENDAR_TIME_ZONE, LIC_CALENDAR_TIME_ZONE } from '../constants';
+import {
+    KCI_CALENDAR_TIME_ZONE,
+    LIA_CALENDAR_TIME_ZONE,
+    OVA_CALENDAR_TIME_ZONE,
+} from '../constants';
 import type { calendar_v3 } from 'googleapis';
 
 export interface NewCalendarEvent {
@@ -19,10 +23,16 @@ export interface CreateEventObject {
     summary: string;
     end: {
         dateTime: string;
-        timeZone: typeof KCI_CALENDAR_TIME_ZONE | typeof LIC_CALENDAR_TIME_ZONE;
+        timeZone:
+            | typeof KCI_CALENDAR_TIME_ZONE
+            | typeof LIA_CALENDAR_TIME_ZONE
+            | typeof OVA_CALENDAR_TIME_ZONE;
     };
     start: {
         dateTime: string;
-        timeZone: typeof KCI_CALENDAR_TIME_ZONE | typeof LIC_CALENDAR_TIME_ZONE;
+        timeZone:
+            | typeof KCI_CALENDAR_TIME_ZONE
+            | typeof LIA_CALENDAR_TIME_ZONE
+            | typeof OVA_CALENDAR_TIME_ZONE;
     };
 }

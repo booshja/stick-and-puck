@@ -20,14 +20,12 @@ const calendar = google.calendar({
 });
 
 export async function getExistingCalendarEvents() {
-    const colors = await calendar.colors.get();
-    return colors;
-    // const calendarEventList = await calendar.events.list({
-    //     calendarId: process.env.GOOGLE_CALENDAR_ID,
-    //     orderBy: 'startTime',
-    //     singleEvents: true,
-    // });
-    // return calendarEventList.data.items;
+    const calendarEventList = await calendar.events.list({
+        calendarId: process.env.GOOGLE_CALENDAR_ID,
+        orderBy: 'startTime',
+        singleEvents: true,
+    });
+    return calendarEventList.data.items;
 }
 
 export async function createGoogleCalendarEvent(newEvent: CreateEventObject) {
